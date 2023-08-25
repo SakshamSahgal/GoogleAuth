@@ -4,11 +4,10 @@ const path = require('path'); //requiring path package
 require('dotenv').config(); //to load environment variables from a .env file
 const app = express();
 
-//--------------------------------------inside another file --------------------------------------/
 //GOOGLE AUTH
 
 const passport = require('./Auth'); // Import passport configuration from auth.js
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: false })); //telling express to use sesssion middleware [Secret used to sign the session cookie]
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false })); //telling express to use sesssion middleware [Secret used to sign the session cookie]
 app.use(passport.initialize()); //Telling express to use passport for authentication
 app.use(passport.session()); // Tell express to use passport.session() to support persistent login sessions (recommended).
 
@@ -63,5 +62,3 @@ app.get("/randomroute",(req,res) => {
   console.log(req.session.username);
   res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'random.html'))
 })
-
-
