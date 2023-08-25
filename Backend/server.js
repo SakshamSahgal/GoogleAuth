@@ -48,15 +48,19 @@ function isLoggedIn(req, res, next) { //Middleware to check if user is logged in
     res.redirect("/auth/google"); //if not authenticated, redirect to login trigger
 }
 
+function saveSession(req){
+  req.session.username = req.user.displayName;
+}
+
 app.get("/protected", isLoggedIn, (req, res) => {
-  console.log("protected")
-  console.log(req.user);
+  console.log("called 4")
+  saveSession(req);
   res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'protected.html'))
 })
 
 app.get("/randomroute",(req,res) => {
   console.log("random");
-  console.log(req.user);
+  console.log(req.session.username);
   res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'random.html'))
 })
 

@@ -6,16 +6,17 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/google/callback"
 }, (accessToken, refreshToken, profile, done) => {
+  console.log("called 1");
   return done(null, profile);
 }));
 
 passport.serializeUser((user, done) => {
-  console.log("success serializing");
+  console.log("called 2");
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log("success deserializing");
+  console.log("called 3");
   done(null, user);
 });
 
