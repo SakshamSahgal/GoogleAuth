@@ -49,10 +49,15 @@ function isLoggedIn(req, res, next) { //Middleware to check if user is logged in
 }
 
 app.get("/protected", isLoggedIn, (req, res) => {
+  console.log("protected")
+  console.log(req.user);
   res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'protected.html'))
 })
 
-
-
+app.get("/randomroute",(req,res) => {
+  console.log("random");
+  console.log(req.user);
+  res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'random.html'))
+})
 
 
